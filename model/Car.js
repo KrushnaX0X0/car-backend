@@ -3,7 +3,6 @@ import {Schema,model} from 'mongoose'
 const carSchma = new Schema({
     carId:{
         type:String,
-        required:true,
         unique:true
     },
     carName:{
@@ -11,7 +10,7 @@ const carSchma = new Schema({
         required:true
     },
     price:{
-        type:Number,
+        type:String,
         required:true
     },
     useTime:{
