@@ -65,6 +65,39 @@ app.post('/addcar', async (req, res) => {
   }
 });
 
+// delete api
+
+app.delete('/car/:carId', async (req, res) => {
+  const { carId } = req.params;
+
+  try {
+    // Find and delete the car by carId
+    const deletedCar = await Car.findOneAndDelete({ carId });
+
+    if (!deletedCar) {
+      return res.status(404).json({
+        success: false,
+        message: 'Car not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Car deleted successfully',
+      data: deletedCar
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred while deleting the car',
+      error: error.message
+    });
+  }
+});
+
+
+
 // Route for getting all cars (example)
 app.get('/cars', async (req, res) => {
   try {
